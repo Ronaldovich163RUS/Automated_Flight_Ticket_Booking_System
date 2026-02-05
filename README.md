@@ -5,78 +5,10 @@
 Также он может получать информацию о всех клиентах и бронированиях. Система разработана в виде веб-приложения и не требует предварительной установки.
 
 
-1. Установка и настройка MySQL
-Установите MySQL Server, MySQL Workbench и MySQL Shell с официального сайта MySQL. В процессе установки задайте пароль для пользователя root и запомните его.
+Инструкция по настройке и запуску приложения Fasticket. Установить MySQL Server, MySQL Workbench и MySQL Shell с официального сайта MySQL. В процессе установки задать пароль для пользователя root и запомнить его. После установки проверить запуск службы MySQL. Для Windows: открыть службы через Win + R, ввести services.msc, найти службу "MySQL80" и запустить. Альтернативно выполнить в командной строке: net start MySQL80.
 
-2. Создание базы данных
-Откройте MySQL Workbench и подключитесь к локальному серверу (Local instance MySQL80), введя пароль root.
-В MySQL Workbench создайте новую базу данных:
-Нажмите на значок создания новой схемы в панели инструментов
-Введите имя базы данных: airline1
-Нажмите Apply и подтвердите создание
-Проверьте создание базы данных airline1 в левой панели Navigator:
-Обновите список схем, нажав кнопку обновления
-Разверните раздел Schemas
-Найдите базу данных airline1
+Открыть MySQL Workbench и подключиться к локальному серверу (Local instance MySQL80), введя пароль root. Создать новую базу данных: нажать на значок создания новой схемы в панели инструментов, ввести имя базы данных "airline1", нажать Apply и подтвердить создание. Альтернативно выполнить SQL-запрос: CREATE DATABASE IF NOT EXISTS airline1. Проверить создание базы данных airline1 в левой панели Navigator: обновить список схем, нажав кнопку обновления, развернуть раздел Schemas, найти базу данных airline1.
 
-3. Настройка Spring-приложения Fasticket
-Получите исходный код Spring-приложения Fasticket и распакуйте или склонируйте проект в рабочую директорию.
+Получить исходный код Spring-приложения Fasticket и распаковать или склонировать проект в рабочую директорию. Настроить файл application.properties со следующими параметрами: указать spring.application.name=fasticket, spring.devtools.restart.poll-interval=2s; для подключения к базе данных установить spring.datasource.url=jdbc:mysql://127.0.0.1:3306/airline1?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC, spring.datasource.username=root, spring.datasource.password=[ВАШ_ПАРОЛЬ_ОТ_MYSQL], spring.datasource.initialization-mode=always; настроить логирование: logging.level.org.springframework.jdbc.core=INFO, logging.level.com.transfer.fasticket=INFO; настроить JPA и Hibernate: spring.jpa.hibernate.ddl-auto=update, spring.jpa.show-sql=true, spring.jpa.properties.hibernate.format_sql=true, spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect; настроить Thymeleaf: spring.thymeleaf.cache=false, spring.thymeleaf.prefix=classpath:/templates/, spring.thymeleaf.suffix=.html, spring.thymeleaf.mode=HTML; при необходимости настроить почту: spring.mail.host=smtp.yandex.ru, spring.mail.port=465, spring.mail.username=[ВАША_ЭЛЕКТРОННАЯ_ПОЧТА], spring.mail.password=[ВАШ_ПАРОЛЬ_ОТ_ПОЧТЫ], spring.mail.properties.mail.smtp.auth=true, spring.mail.properties.mail.smtp.ssl.enable=true, spring.mail.properties.mail.smtp.starttls.enable=true, spring.mail.properties.mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, spring.mail.properties.mail.smtp.socketFactory.port=465, spring.mail.properties.mail.smtp.socketFactory.fallback=false, spring.mail.properties.mail.smtp.ssl.trust=smtp.yandex.ru, spring.mail.properties.mail.debug=true. Заменить [ВАШ_ПАРОЛЬ_ОТ_MYSQL] на пароль, заданный для пользователя root при установке MySQL. При использовании другого пользователя базы данных указать его имя и пароль. При отсутствии необходимости отправки email закомментировать строки с настройками почты.
 
-4. Настройка файла application.properties
-Настройте файл application.properties со следующими параметрами:
-
-properties
-# Основные настройки приложения
-spring.application.name=fasticket
-spring.devtools.restart.poll-interval=2s
-
-# Настройки подключения к базе данных
-spring.datasource.url=jdbc:mysql://127.0.0.1:3306/airline1?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=ВАШ_ПАРОЛЬ_ОТ_MYSQL
-spring.datasource.initialization-mode=always
-
-# Настройки логирования
-logging.level.org.springframework.jdbc.core=INFO
-logging.level.com.transfer.fasticket=INFO
-
-# Настройки JPA и Hibernate
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-
-# Настройки Thymeleaf
-spring.thymeleaf.cache=false
-spring.thymeleaf.prefix=classpath:/templates/
-spring.thymeleaf.suffix=.html
-spring.thymeleaf.mode=HTML
-
-# Настройки почты (если требуется)
-spring.mail.host=smtp.yandex.ru
-spring.mail.port=465
-spring.mail.username=ВАША_ЭЛЕКТРОННАЯ_ПОЧТА
-spring.mail.password=ВАШ_ПАРОЛЬ_ОТ_ПОЧТЫ
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties.mail.smtp.ssl.enable=true
-spring.mail.properties.mail.smtp.starttls.enable=true
-spring.mail.properties.mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
-spring.mail.properties.mail.smtp.socketFactory.port=465
-spring.mail.properties.mail.smtp.socketFactory.fallback=false
-spring.mail.properties.mail.smtp.ssl.trust=smtp.yandex.ru
-spring.mail.properties.mail.debug=true
-Примечания:
-
-Замените ВАШ_ПАРОЛЬ_ОТ_MYSQL на пароль, который вы задали для пользователя root при установке MySQL
-
-Если вы используете другого пользователя базы данных, укажите его имя и пароль
-
-Настройки почты: если вам не требуется отправка email, вы можете закомментировать эти строки
-
-Если вы используете другой почтовый сервис, настройки будут отличаться
-
-5. Запуск Spring-приложения
-Запуск через главный класс в IDE
-Откройте проект в вашей IDE (IntelliJ IDEA, Eclipse, VS Code и т.д.)
-Найдите главный класс с аннотацией @SpringBootApplication
-Запустите этот класс
+Открыть проект в IDE, найти главный класс с аннотацией @SpringBootApplication и запустить его. Альтернативно запустить приложение через терминал: для Maven проектов выполнить mvn spring-boot:run, для Gradle проектов выполнить gradle bootRun. Проверить логи приложения на наличие ошибок. Убедиться в успешном подключении к базе данных и создании таблиц.
