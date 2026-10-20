@@ -1,0 +1,123 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 160px);
+    padding: 2rem 0;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group input {
+    width: auto;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.auth-links a {
+    color: #ff6b00;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-links a:hover {
+    color: #e05d00;
+    text-decoration: underline;
+}
+
+/* Стиль для поля даты */
+input[type="date"] {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+/* .date-input:focus {
+    border-color: #ff6b00;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
+} */
+
+/* Календарь для мобильных устройств */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+
+.invalid-feedback {
+    margin-top: 5px;
+    color: red;
+}
+
+/* Стили для ошибок */
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    color: #ff3b30;
+    font-size: 12px;
+    margin-top: 4px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition:
+        max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s ease-out 0.1s,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.error-message.visible {
+    max-height: 50px;
+    opacity: 1;
+    transform: translateY(0);
+}

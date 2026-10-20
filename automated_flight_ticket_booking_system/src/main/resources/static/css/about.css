@@ -1,0 +1,177 @@
+.project-info {
+    padding: 2rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
+.project-info p {
+    margin-bottom: 1rem;
+}
+
+.project-info ul {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.project-info li {
+    margin-bottom: 0.5rem;
+}
+
+.accordion {
+    margin-bottom: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background-color: #f8f9fa;
+    padding: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.accordion-header:hover {
+    background-color: #e9ecef;
+}
+
+.accordion-header::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: #666;
+    transition: transform 0.3s;
+}
+
+.accordion-header.active::after {
+    content: '-';
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    background-color: white;
+}
+
+.accordion-content.show {
+    padding: 1.5rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.content-link {
+    color: #ff6b00;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.content-link:hover {
+    color: #e05a00;
+    text-decoration: none;
+}
+
+.nested-accordion {
+    margin-top: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+
+.nested-accordion .accordion-header {
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: #fafafa;
+}
+
+.nested-accordion .accordion-content {
+    padding: 0;
+}
+
+.nested-accordion .accordion-content.show {
+    padding: 1.2rem;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.deeply-nested-accordion {
+    margin-top: 0.8rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.deeply-nested-accordion .accordion-header {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+    background-color: #fcfcfc;
+}
+
+.deeply-nested-accordion .accordion-content {
+    padding: 0;
+}
+
+.deeply-nested-accordion .accordion-content.show {
+    padding: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.content-text {
+    line-height: 1.6;
+    color: #444;
+    margin: 0;
+}
+
+.content-text img {
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.content-text p {
+    margin-bottom: 1rem;
+}
+
+.content-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Стили для скроллбара */
+.accordion-content::-webkit-scrollbar,
+.nested-accordion .accordion-content::-webkit-scrollbar,
+.deeply-nested-accordion .accordion-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.accordion-content::-webkit-scrollbar-track,
+.nested-accordion .accordion-content::-webkit-scrollbar-track,
+.deeply-nested-accordion .accordion-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.accordion-content::-webkit-scrollbar-thumb,
+.nested-accordion .accordion-content::-webkit-scrollbar-thumb,
+.deeply-nested-accordion .accordion-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.accordion-content::-webkit-scrollbar-thumb:hover,
+.nested-accordion .accordion-content::-webkit-scrollbar-thumb:hover,
+.deeply-nested-accordion .accordion-content::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}

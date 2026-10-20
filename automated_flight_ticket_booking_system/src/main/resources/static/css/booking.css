@@ -1,0 +1,838 @@
+/* Карточка билета */
+.ticket-card:first-child {
+    margin-top: 2rem;
+}
+
+.flight-details,
+.ticket-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #eee;
+    display: block;
+    max-width: 980px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+.ticket-header,
+.flight-route {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding: 0 1rem;
+    background: none;
+    border-radius: 0;
+    gap: 0;
+}
+
+.flight-point,
+.departure,
+.arrival {
+    text-align: center;
+    flex: 0 0 auto;
+    min-width: 120px;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.flight-point:first-child,
+.departure:first-child {
+    margin-left: 0;
+}
+
+.flight-duration {
+    flex: 1;
+    position: relative;
+    padding: 0 1rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+}
+
+.duration-line {
+    position: absolute;
+    top: 50%;
+    left: 0.25rem;
+    right: 0.25rem;
+    height: 2px;
+    background-color: #ddd;
+    z-index: 1;
+    width: auto;
+    margin: 0;
+}
+
+.duration-line::before,
+.duration-line::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #ff6b00;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.duration-line::before {
+    left: 0;
+}
+
+.duration-line::after {
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.duration,
+.duration-time {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* Время, город, дата */
+.ticket-time,
+.time {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.ticket-city,
+.city {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0.3rem 0;
+    font-weight: 400;
+}
+
+.ticket-date,
+.date {
+    font-size: 0.9rem;
+    color: #999;
+    margin: 0;
+}
+
+/* Информация о рейсе */
+.ticket-info,
+.flight-info-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    background: none;
+}
+
+.ticket-airline,
+.airline {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ticket-luggage {
+    display: flex;
+    gap: 1rem;
+}
+
+.luggage-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.luggage-item i {
+    color: #999;
+}
+
+.flight-number {
+    color: #666;
+}
+
+/* Удаляем старые стили, которые конфликтуют с results */
+/* .flight-details,
+.flight-route,
+.departure,
+.arrival,
+.flight-duration,
+.duration-line,
+.airline,
+.flight-number,
+.flight-info-details {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+} */
+
+@media (max-width: 768px) {
+
+    .ticket-header,
+    .flight-route {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .flight-duration {
+        width: 100%;
+        padding: 1rem 0;
+    }
+}
+
+/* Passenger Counter Styles */
+.counter-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.counter {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.counter label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.counter-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.counter-controls button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter-controls button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.counter-controls input {
+    width: 60px;
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Passenger Forms Styles */
+.passenger-form {
+    background: none;
+    border-radius: 12px;
+    max-width: 900px;
+    margin-left: 0;
+    margin-right: 0;
+    box-shadow: none;
+}
+
+.passenger-form:not(:first-child) {
+    margin-top: 1.5rem;
+}
+
+.passenger-form h3 {
+    color: #222;
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.data-group {
+    width: 272px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.data-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+    width: fit-content;
+}
+
+.data-group input,
+.data-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    height: 44px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.data-group input:focus,
+.data-group select:focus {
+    outline: none;
+    border-color: #ff6b00;
+}
+
+.data-group input:read-only,
+.data-group select:disabled {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    color: #333;
+}
+
+.data-group input::placeholder {
+    color: #999;
+    transition: opacity 0.3s;
+}
+
+.data-group input:focus::placeholder {
+    opacity: 0.5;
+}
+
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    color: #ff3b30;
+    font-size: 12px;
+    margin-top: 4px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease-out 0.1s, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.error-message.visible {
+    max-height: 50px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.data-group.error input,
+.data-group.error select {
+    border-color: #ff3b30 !important;
+}
+
+@media (max-width: 900px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .passenger-form {
+        padding: 1rem 0 1rem 0;
+        max-width: 100%;
+    }
+}
+
+/* Baggage Selection Styles */
+.baggage-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.baggage-option {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.baggage-option:hover {
+    background: #e9ecef;
+}
+
+.baggage-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+}
+
+/* Total Cost Styles */
+.total-cost {
+    text-align: right;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Стили для сообщений об ошибках */
+.error {
+    border-color: #dc3545 !important;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem auto;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .flight-route {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .flight-duration {
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .counter-group {
+        grid-template-columns: 1fr;
+    }
+
+    .baggage-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.passenger-form {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Submit Button Styles */
+.btn-primary {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+/* --- Новый блок выбора пассажиров (как в results/figma) --- */
+.passenger-subtitle {
+    color: #6b6e76;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.passenger-block {
+    display: flex;
+    border: 1.5px solid #222;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #fff;
+    margin-top: 1.5rem;
+    max-width: 900px;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.passenger-controls {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 0.5rem;
+    border-right: 1.5px solid #222;
+    gap: 1.25rem;
+    min-width: 0;
+}
+
+.passenger-controls:last-child {
+    border-right: none;
+}
+
+.passenger-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0;
+    text-align: left;
+    min-width: 110px;
+    margin-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+}
+
+.passenger-desc {
+    font-size: 0.95rem;
+    color: #888;
+    font-weight: 400;
+}
+
+.passenger-controls button {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid #222;
+    background: #fff;
+    color: #222;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.passenger-controls button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.passenger-controls span[id$='-count'] {
+    font-size: 1.3rem;
+    font-weight: 600;
+    min-width: 2ch;
+    text-align: center;
+    display: inline-block;
+}
+
+@media (max-width: 900px) {
+    .passenger-block {
+        flex-direction: column;
+        border-radius: 16px;
+        max-width: 100%;
+    }
+
+    .passenger-controls {
+        border-right: none;
+        border-bottom: 1.5px solid #222;
+        padding: 0.5rem 0.25rem;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .passenger-controls:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Удаляю старые стили */
+.counter-group,
+.counter {
+    display: none !important;
+}
+
+/* Внутренние отступы для секций */
+section.card {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.contact-fields {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+.contact-fields>.form-group {
+    margin-bottom: 0;
+}
+
+.contact-input {
+    min-width: 450px;
+    background: #f8f9fa;
+    color: #222;
+}
+
+.contact-input:focus {
+    border-color: #ff6b00;
+    outline: none;
+    background: #fff;
+}
+
+/* --- Новые стили для кнопок и seat selection --- */
+.btn-black {
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.9rem 2.2rem;
+    min-width: 160px;
+    max-width: 200px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: inline-block;
+}
+
+.btn-black:hover,
+.btn-black:focus {
+    background: #222;
+    color: #fff;
+}
+
+.fixed-book-btn {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    background: #ff6b00;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+    padding: 0;
+    margin: 0;
+}
+
+.fixed-book-btn .btn-primary {
+    width: 100%;
+    background: #ff6b00;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1.2rem 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+}
+
+.seat-selection-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.seat-selection-icon {
+    font-size: 2rem;
+    margin-right: 12px;
+    vertical-align: middle;
+    color: #222;
+}
+
+/* Удаляю старые стили кнопок */
+/* .btn,
+.btn-primary,
+.btn-secondary,
+.action-buttons {
+    display: none !important;
+} */
+
+@media (max-width: 600px) {
+    .btn-black {
+        min-width: 100px;
+        font-size: 0.95rem;
+        padding: 0.7rem 1.2rem;
+    }
+
+    .fixed-book-btn .btn-primary {
+        font-size: 1rem;
+        padding: 1rem 0;
+    }
+}
+
+.btn-orange {
+    background: #ff6b00;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.9rem 2.2rem;
+    min-width: 160px;
+    max-width: 200px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: inline-block;
+}
+
+.btn-orange:hover,
+.btn-orange:focus {
+    background: #e05d00;
+    color: #fff;
+}
+
+.total-cost-summary {
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    border-radius: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2.2rem 2.5rem 2.2rem 2.5rem;
+    margin-bottom: 2.5rem;
+    max-width: 980px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 2.5rem;
+}
+
+.total-cost-label {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #222;
+    margin-right: 2.5rem;
+}
+
+.total-cost-amount {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #28a745;
+    letter-spacing: 0.5px;
+}
+
+/* Убираю старый .card у total-cost */
+.total-cost.card {
+    box-shadow: none !important;
+    border: none !important;
+    background: none !important;
+    padding: 0 !important;
+}
+
+.baggage-selection-desc {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: #6b6e76;
+    font-size: 1.1rem;
+}
+
+.baggage-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.baggage-btn {
+    min-width: 44px;
+    max-width: 44px;
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    font-weight: 700;
+    background: #ff6b00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.baggage-btn:hover,
+.baggage-btn:focus {
+    background: #e05d00;
+}
+
+.baggage-count {
+    font-size: 1.7rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.baggage-cost {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 1.15rem;
+}
+
+.btn-book-main {
+    width: 100%;
+    max-width: 520px;
+    margin: 2rem auto;
+    display: block;
+    background: #ff6b00;
+    color: #fff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    border-radius: 14px;
+    padding: 1.3rem 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    outline: none;
+}
+
+.btn-book-main:hover,
+.btn-book-main:focus {
+    background: #e05d00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 107, 0, 0.13);
+}
+
+@media (max-width: 600px) {
+    .btn-book-main {
+        font-size: 1.05rem;
+        padding: 1rem 0;
+        border-radius: 10px;
+    }
+}
+
+/* --- Блокировка фокуса и выделения для disabled/readonly input, но разрешаем выделение текста --- */
+input[readonly],
+input[disabled],
+select[disabled] {
+    pointer-events: none;
+}

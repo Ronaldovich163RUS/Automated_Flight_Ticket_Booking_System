@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - FASTICKET</title>
+    <link rel="stylesheet" href="css/base.css" th:href=@{css/base.css}>
+    <link rel="stylesheet" href="css/registration.css" th:href=@{css/registration.css}>
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html" th:href=@{/}>
+                    <span>FAS</span>
+                    <svg class="plane-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.4453 0.156246C16.5703 0.617184 15.7266 2.22656 15.3828 4.08593C15.1484 5.35156 15.1016 6.35156 15.1016 10.3594V14.4375L12.5938 16.2891C11.2109 17.3047 10.0312 18.1562 9.97656 18.1797C9.89844 18.2109 9.875 18.0469 9.875 17.3906V16.5625H8.58594H7.29688V18.3359C7.29688 19.3203 7.26562 20.1562 7.23438 20.2031C7.20312 20.25 5.78125 21.3125 4.07812 22.5703L0.96875 24.8594V26.5C0.96875 27.7812 0.992188 28.1328 1.0625 28.1016C1.11719 28.0781 4.33594 26.7578 8.21875 25.1562C12.1016 23.5547 15.2891 22.2578 15.3047 22.2734C15.3203 22.2891 15.4375 24.8516 15.5703 27.9687C15.7031 31.0859 15.8281 34.0391 15.8516 34.5312L15.8984 35.4297L13.7031 36.6328L11.5156 37.8437V38.9297V40.0156L11.7344 39.9687C12.5469 39.7969 17.8359 38.9062 18.0156 38.9062C18.2031 38.9062 23.5625 39.8125 24.2734 39.9687L24.4844 40.0156V38.9219V37.8281L22.2969 36.625L20.1016 35.4297L20.1484 34.4922C20.1719 33.9766 20.2969 31.0234 20.4297 27.9297C20.5625 24.8359 20.6875 22.2891 20.7031 22.2734C20.7188 22.2578 23.9219 23.5547 27.8125 25.1641C31.7109 26.7734 34.9219 28.0937 34.9609 28.1094C35 28.125 35.0312 27.3984 35.0312 26.5V24.8516L32.2031 22.7656C30.6406 21.625 29.2188 20.5625 29.0391 20.4141L28.7031 20.1484V18.3516V16.5625H27.4141H26.125V17.3906C26.125 17.9375 26.0938 18.2031 26.0391 18.1875C25.9922 18.1719 24.8203 17.3203 23.4297 16.2969L20.8906 14.4297V10.3594C20.8906 6.35156 20.8516 5.35156 20.6172 4.08593C20.3594 2.71875 19.7969 1.375 19.2031 0.710934C18.5859 0.0234337 18.0234 -0.148441 17.4453 0.156246Z"
+                            transform="scale(0.6)" />
+                    </svg>
+                    <span>ICKET</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container auth-container">
+        <div class="auth-card card">
+            <h1 class="page-title">Регистрация</h1>
+            <form class="auth-form" method="post" th:action="@{/registration}" th:object="${clientRegistrationDto}" novalidate>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" th:name="phoneNumber"
+                           th:field="*{phoneNumber}" placeholder="+7 (___) ___-__-__"
+                           th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'"
+                           required>
+                    <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
+                    <div class="error-message" id="phone-error"></div>
+                    <!--<div class="invalid-feedback" th:if="${duplicatePhoneNumber != null}" th:text="${duplicatePhoneNumber}"></div>-->
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="last-name">Фамилия</label>
+                        <input type="text" id="last-name" name="last_name" th:name="lastName"
+                               th:field="*{lastName}" placeholder="Введите фамилию"
+                               th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid'"
+                               required>
+                        <div class="invalid-feedback" th:errors="*{lastName}"></div>
+                        <div class="error-message" id="last-name-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="first-name">Имя</label>
+                        <input type="text" id="first-name" name="first_name" th:name="firstName"
+                               th:field="*{firstName}" placeholder="Введите имя"
+                               th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid'"
+                               required>
+                        <div class="invalid-feedback" th:errors="*{firstName}"></div>
+                        <div class="error-message" id="first-name-error"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name">Отчество</label>
+                    <input type="text" id="middle-name" name="middle_name" th:name="middleName"
+                           th:field="*{middleName}" placeholder="Введите отчество">
+                    <div class="error-message" id="middle-name-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" th:name="email"
+                           th:field="*{email}" placeholder="Введите email"
+                           th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"
+                           required>
+                    <div class="invalid-feedback" th:errors="*{email}"></div>
+                    <div class="error-message" id="email-error"></div>
+                    <!--<div class="invalid-feedback" th:if="${duplicateEmail != null}" th:text="${duplicateEmail}"></div>-->
+                </div>
+                <!--
+                <div class="form-group">
+                    <label for="birthdate">Дата рождения</label>
+                    <input type="text" id="birthdate" name="birthdate" th:name="dateOfBirth"
+                           th:field="*{dateOfBirth}"  placeholder="гггг-мм-дд"
+                           th:classappend="${#fields.hasErrors('dateOfBirth')} ? 'is-invalid'"
+                           pattern="\d{4}\-\d{2}\-\d{2}" required class="date-input">
+                    <div class="invalid-feedback" th:errors="*{dateOfBirth}"></div>
+                </div>
+                -->
+                <div class="form-group">
+                    <label for="birthdate">Дата рождения</label>
+                    <input type="date" id="birthdate" name="birthdate" th:name="dateOfBirth"
+                           th:field="*{dateOfBirth}"
+                           th:classappend="${#fields.hasErrors('dateOfBirth')} ? 'is-invalid'"
+                           required class="date-input">
+                    <div class="invalid-feedback" th:errors="*{dateOfBirth}"></div>
+                    <div class="error-message" id="birthdate-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" th:name="password"
+                           th:field="*{password}" placeholder="Введите пароль"
+                           th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'"
+                           required>
+                    <div class="invalid-feedback" th:errors="*{password}"></div>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Подтвердите пароль</label>
+                    <input type="password" id="confirm-password" name="confirm_password"
+                           th:field="*{confirmPassword}" placeholder="Повторите пароль"
+                           th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid'"
+                           required>
+                    <div class="invalid-feedback" th:errors="*{confirmPassword}"></div>
+                    <div class="error-message" id="confirm-password-error"></div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">Соглашаюсь с условиями передачи данных</label>
+                </div>
+                <button type="button" id="registration" class="btn auth-btn">Зарегистрироваться</button>
+                <div class="auth-links">
+                    <a href="login.html" th:href=@{/login}>Уже есть аккаунт? Войти</a>
+                </div>
+            </form>
+            <!--
+            <form class="auth-form" th:action="@{/registration}" method="post" th:object="${clientDto}">
+
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" th:field="*{phoneNumber}"
+                           class="form-control"
+                           th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'"
+                           placeholder="+7 (999) 999-99-99">
+                    <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="lastName">Фамилия</label>
+                        <input type="text" id="lastName" th:field="*{lastName}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{lastName}"></div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="firstName">Имя</label>
+                        <input type="text" id="firstName" th:field="*{firstName}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{firstName}"></div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="middleName">Отчество</label>
+                        <input type="text" id="middleName" th:field="*{middleName}"
+                               class="form-control">
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" th:field="*{email}"
+                           class="form-control"
+                           th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+                    <div class="invalid-feedback" th:errors="*{email}"></div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="dateOfBirth">Дата рождения</label>
+                    <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}"
+                           class="form-control"
+                           th:classappend="${#fields.hasErrors('dateOfBirth')} ? 'is-invalid'">
+                    <div class="invalid-feedback" th:errors="*{dateOfBirth}"></div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" th:field="*{password}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{password}"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confirmPassword">Подтверждение</label>
+                        <input type="password" id="confirmPassword" th:field="*{confirmPassword}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{confirmPassword}"></div>
+                    </div>
+                </div>
+
+
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="agree" required>
+                    <label class="form-check-label" for="agree">
+                        Согласен с <a href="#">правилами обработки данных</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+
+
+                <div class="text-center mt-3">
+                    <a th:href="@{/login}">Уже есть аккаунт? Войти</a>
+                </div>
+            </form>
+            -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script type="module" th:src="@{/js/registration.js}"></script>
+</body>
+
+</html>

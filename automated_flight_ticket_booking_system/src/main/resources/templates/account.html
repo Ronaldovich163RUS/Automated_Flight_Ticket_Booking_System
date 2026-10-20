@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASTICKET – Личный кабинет</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Georama:wght@600&family=Montserrat:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="css/base.css" th:href=@{css/base.css} rel="stylesheet">
+    <link href="css/account.css" th:href=@{css/account.css} rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html" th:href="@{/}">
+                    <span>FAS</span>
+                    <svg class="plane-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.4453 0.156246C16.5703 0.617184 15.7266 2.22656 15.3828 4.08593C15.1484 5.35156 15.1016 6.35156 15.1016 10.3594V14.4375L12.5938 16.2891C11.2109 17.3047 10.0312 18.1562 9.97656 18.1797C9.89844 18.2109 9.875 18.0469 9.875 17.3906V16.5625H8.58594H7.29688V18.3359C7.29688 19.3203 7.26562 20.1562 7.23438 20.2031C7.20312 20.25 5.78125 21.3125 4.07812 22.5703L0.96875 24.8594V26.5C0.96875 27.7812 0.992188 28.1328 1.0625 28.1016C1.11719 28.0781 4.33594 26.7578 8.21875 25.1562C12.1016 23.5547 15.2891 22.2578 15.3047 22.2734C15.3203 22.2891 15.4375 24.8516 15.5703 27.9687C15.7031 31.0859 15.8281 34.0391 15.8516 34.5312L15.8984 35.4297L13.7031 36.6328L11.5156 37.8437V38.9297V40.0156L11.7344 39.9687C12.5469 39.7969 17.8359 38.9062 18.0156 38.9062C18.2031 38.9062 23.5625 39.8125 24.2734 39.9687L24.4844 40.0156V38.9219V37.8281L22.2969 36.625L20.1016 35.4297L20.1484 34.4922C20.1719 33.9766 20.2969 31.0234 20.4297 27.9297C20.5625 24.8359 20.6875 22.2891 20.7031 22.2734C20.7188 22.2578 23.9219 23.5547 27.8125 25.1641C31.7109 26.7734 34.9219 28.0937 34.9609 28.1094C35 28.125 35.0312 27.3984 35.0312 26.5V24.8516L32.2031 22.7656C30.6406 21.625 29.2188 20.5625 29.0391 20.4141L28.7031 20.1484V18.3516V16.5625H27.4141H26.125V17.3906C26.125 17.9375 26.0938 18.2031 26.0391 18.1875C25.9922 18.1719 24.8203 17.3203 23.4297 16.2969L20.8906 14.4297V10.3594C20.8906 6.35156 20.8516 5.35156 20.6172 4.08593C20.3594 2.71875 19.7969 1.375 19.2031 0.710934C18.5859 0.0234337 18.0234 -0.148441 17.4453 0.156246Z"
+                            transform="scale(0.6)" />
+                    </svg>
+                    <span>ICKET</span>
+                </a>
+            </div>
+            <a class="profile-link" href="account.html" th:href="@{/account}">
+                <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g fill="none" stroke="white" stroke-dasharray="28" stroke-dashoffset="28" stroke-linecap="round"
+                        stroke-width="2">
+                        <path d="M4 21V20C4 16.6863 6.68629 14 10 14H14C17.3137 14 20 16.6863 20 20V21">
+                            <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="28;0" />
+                        </path>
+                        <path
+                            d="M12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7C16 9.20914 14.2091 11 12 11Z">
+                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.5s" dur="0.4s"
+                                values="28;0" />
+                        </path>
+                    </g>
+                </svg>
+                <span th:text="${profile}"></span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <h1 class="main-title">Личный кабинет</h1>
+
+        <section class="account-section">
+            <h2 class="section-title">Общие сведения</h2>
+
+            <div class="account-content">
+                <!-- Левая часть (75%) -->
+                <div class="account-data" id="acount-form" th:object="${clientDto}" th:method="put">
+                    <div class="data-columns">
+                        <!-- Первый столбец -->
+                        <div class="data-column">
+                            <div class="data-group">
+                                <label for="email">Адрес электронной почты</label>
+                                <input type="email" id="email" value="" th:field="*{email}"
+                                    placeholder="example@domain.com" required readonly>
+                                <div class="error-message" id="email-error"></div>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="phone">Номер телефона</label>
+                                <input type="tel" id="phone" value="" placeholder="+7XXXXXXXXXX"
+                                    th:field="*{phoneNumber}" required readonly>
+                                <div class="error-message" id="phone-error"></div>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="lastname">Фамилия</label>
+                                <input type="text" id="lastname" value="" placeholder="Иванов" th:field="*{lastName}"
+                                    required readonly maxlength="15" minlength="2">
+                                <div class="error-message" id="lastname-error"></div>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="firstname">Имя</label>
+                                <input type="text" id="firstname" value="" placeholder="Иван" th:field="*{firstName}"
+                                    required readonly maxlength="15" minlength="2">
+                                <div class="error-message" id="firstname-error"></div>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="middlename">Отчество (при наличии)</label>
+                                <input type="text" id="middlename" value="" placeholder="Иванович (если есть)"
+                                    th:field="*{middleName}" readonly maxlength="20" minlength="2">
+                                <div class="error-message" id="middlename-error"></div>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="citizenship">Гражданство</label>
+                                <select id="citizenship" th:field="*{citizenship}" required disabled>
+                                    <option value=""></option>
+                                    <option value="russia">Россия</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Второй столбец -->
+                        <div class="data-column">
+                            <div class="data-group">
+                                <label for="doc-type">Тип документа</label>
+                                <select id="doc-type" th:field="*{document}" required disabled>
+                                    <option value=""></option>
+                                    <option value="passport">Паспорт РФ</option>
+                                    <option value="international_passport">Загранпаспорт</option>
+                                    <option value="birth_certificate">Свидетельство о рождении</option>
+                                </select>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="doc-series">Серия документа</label>
+                                <input type="text" id="doc-series" placeholder="4 цифры (например: 1234)"
+                                    th:field="*{documentSeries}" required readonly>
+                                <div class=" error-message" id="series-error">
+                                </div>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="doc-number">Номер документа</label>
+                                <input type="text" id="doc-number" th:field="*{documentNumber}"
+                                    placeholder="6 цифр (например: 1234)56" required readonly>
+                                <div class=" error-message" id="number-error">
+                                </div>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="birthdate">Дата рождения</label>
+                                <input type="date" id="birthdate" value="" th:field="*{dateOfBirth}" required readonly>
+                                <div class="error-message" id="birthdate-error"></div>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="gender">Пол</label>
+                                <select id="gender" th:field="*{gender}" required disabled>
+                                    <option value=""></option>
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
+
+                            <div class="data-group">
+                                <label for="password">Пароль</label>
+                                <div class="password-wrapper">
+                                    <input type="text" id="password" th:field="*{password}" readonly>
+                                    <button type="button" id="toggle-password" class="toggle-password-btn" disabled
+                                        title="Показать/скрыть пароль">
+                                        <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            fill="none" stroke="currentColor" stroke-width="2">
+                                            <path
+                                                d="M12 5C7 5 2.73 8.11 1 12C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 12C21.27 8.11 17 5 12 5ZM12 16C9.24 16 7 13.76 7 11C7 8.24 9.24 6 12 6C14.76 6 17 8.24 17 11C17 13.76 14.76 16 12 16ZM12 8C10.34 8 9 9.34 9 11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11C15 9.34 13.66 8 12 8Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="error-message" id="password-error"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-actions">
+                        <form>
+                            <button id="edit-data" class="btn" title="Shift+E">Редактировать данные</button>
+                        </form>
+                        <form method="POST" th:action="@{/account}">
+                            <input type="hidden" name="_method" value="PUT">
+                            <button type="submit" id="save-data" class="btn" disabled title="Shift+s">Сохранить
+                                изменения</button>
+                        </form>
+                    </div>
+
+                    <button id="delete-account" class="delete-btn">
+                        <svg class="trash-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                        </svg>
+                        Удалить личный кабинет
+                    </button>
+                </div>
+
+                <!-- Правая часть (25%) -->
+                <div class="account-links">
+                    <a href="mybookings.html" th:href="@{/mybookings}" id="bookings" class="account-link">
+                        <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V9z" />
+                            <path d="M8 5v2m8-2v2M8 17v2m8-2v2" />
+                        </svg>
+                        <span class="account-link-text">Мои бронирования</span>
+                    </a>
+
+                    <a href="history.html" th:href="@{/history}" id="history" class="account-link">
+                        <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                        <span class="account-link-text">Прошлые бронирования</span>
+                    </a>
+
+                    <button id="show-hotkeys" class="account-link">
+                        <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        <span class="account-link-text">Горячие клавиши</span>
+                    </button>
+
+                    <button id="logout" class="account-link">
+                        <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5z" />
+                            <path d="M4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                        </svg>
+                        <span class="account-link-text">Выход</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <dialog id="hotkeys-dialog" class="hotkeys-dialog">
+        <div class="dialog-content">
+            <h3>Горячие клавиши</h3>
+            <ul>
+                <li><kbd>Shift</kbd> + <kbd>E</kbd> — Редактировать данные</li>
+                <li><kbd>Shift</kbd> + <kbd>S</kbd> — Сохранить изменения</li>
+                <li><kbd>Shift</kbd> + <kbd>L</kbd> — Выход</li>
+                <li><kbd>Shift</kbd> + <kbd>D</kbd> — Удалить аккаунт</li>
+                <li><kbd>Shift</kbd> + <kbd>B</kbd> — Мои бронирования</li>
+                <li><kbd>Shift</kbd> + <kbd>H</kbd> — История бронирований</li>
+                <li><kbd>Shift</kbd> + <kbd>I</kbd> — Информация о горячих клавишах</li>
+                <li><kbd>Esc</kbd> — Отменить редактирование</li>
+            </ul>
+            <button class="btn" id="close-dialog">Закрыть</button>
+        </div>
+    </dialog>
+
+    <script th:src="@{js/account.js}"></script>
+</body>
+
+</html>

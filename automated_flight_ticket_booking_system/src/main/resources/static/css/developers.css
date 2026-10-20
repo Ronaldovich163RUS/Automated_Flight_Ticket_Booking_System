@@ -1,0 +1,113 @@
+/* Информация о проекте */
+.project-info {
+    padding: 2rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
+.project-info p {
+    margin-bottom: 1rem;
+}
+
+/* Команда */
+.team-title {
+    text-align: center;
+}
+
+.team-description {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #666;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Сетка с карточками разработчиков */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+
+.developer-card {
+    aspect-ratio: 1 / 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.photo-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.developer-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.developer-role {
+    color: #ff6b00;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.developer-bio {
+    color: #666;
+    margin: 1rem 0;
+    flex-grow: 1;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.social-link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.social-link:hover .social-icon[fill="#0088cc"] {
+    fill: #0077b5;
+}
+
+.social-link:hover .social-icon[fill="#4680c2"] {
+    fill: #4a76a8;
+}
+
+.social-link:hover .social-icon[fill="#333"] {
+    fill: #4078c0;
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+}

@@ -1,0 +1,147 @@
+/* Основные стили списка бронирований */
+.bookings-list {
+    margin: 3rem 0;
+}
+
+.tickets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.ticket-card {
+    display: flex;
+    padding: 1.5rem;
+    gap: 2rem;
+    min-width: 1200px;
+}
+
+.ticket-content {
+    flex: 1;
+}
+
+.ticket-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 200px;
+    border-left: 1px solid #eee;
+    padding-left: 1.5rem;
+}
+
+.action-btn {
+    background-color: #fff;
+    color: #ff6b00;
+    border: 1px solid #ff6b00;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+
+}
+
+.action-btn:hover {
+    background-color: #ff6b00;
+    color: white;
+}
+
+.action-btn.cancel {
+    color: #ff3b30;
+    border-color: #ff3b30;
+}
+
+.action-btn.cancel:hover {
+    background-color: #ff3b30;
+    color: white;
+}
+
+/* Остальные стили как в history.css */
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.ticket-time {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.ticket-city {
+    font-size: 1rem;
+    color: #666;
+}
+
+.ticket-airport {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.ticket-duration {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.ticket-duration span {
+    font-weight: 600;
+}
+
+.ticket-luggage {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.ticket-luggage-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #666;
+}
+
+.ticket-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.ticket-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ff6b00;
+}
+
+.no-bookings {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .ticket-card {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .ticket-actions {
+        border-left: none;
+        border-top: 1px solid #eee;
+        padding-left: 0;
+        padding-top: 1.5rem;
+        min-width: auto;
+    }
+}

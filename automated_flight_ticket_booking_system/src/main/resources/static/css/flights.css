@@ -1,0 +1,63 @@
+.dialog {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    min-width: 420px;
+}
+
+.dialog-title {
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+    margin: 32px 0 18px 0;
+}
+
+.dialog-content {
+    padding: 0 32px 12px 32px;
+}
+
+.dialog-content label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.dialog-content input,
+.dialog-content select {
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    padding: 18px 0 32px 0;
+}
+
+dialog .btn {
+    min-width: 120px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    border: none;
+    padding: 10px 0;
+    cursor: pointer;
+    background: #ff6a00;
+    color: #fff;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+dialog .btn.secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+dialog .btn:active {
+    filter: brightness(0.95);
+}

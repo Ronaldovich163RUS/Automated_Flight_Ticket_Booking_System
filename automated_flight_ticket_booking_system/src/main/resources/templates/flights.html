@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASTICKET – Управление рейсами</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/tables.css">
+    <link rel="stylesheet" href="/css/flights.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="">
+                    <span>FAS</span>
+                    <svg class="plane-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.4453 0.156246C16.5703 0.617184 15.7266 2.22656 15.3828 4.08593C15.1484 5.35156 15.1016 6.35156 15.1016 10.3594V14.4375L12.5938 16.2891C11.2109 17.3047 10.0312 18.1562 9.97656 18.1797C9.89844 18.2109 9.875 18.0469 9.875 17.3906V16.5625H8.58594H7.29688V18.3359C7.29688 19.3203 7.26562 20.1562 7.23438 20.2031C7.20312 20.25 5.78125 21.3125 4.07812 22.5703L0.96875 24.8594V26.5C0.96875 27.7812 0.992188 28.1328 1.0625 28.1016C1.11719 28.0781 4.33594 26.7578 8.21875 25.1562C12.1016 23.5547 15.2891 22.2578 15.3047 22.2734C15.3203 22.2891 15.4375 24.8516 15.5703 27.9687C15.7031 31.0859 15.8281 34.0391 15.8516 34.5312L15.8984 35.4297L13.7031 36.6328L11.5156 37.8437V38.9297V40.0156L11.7344 39.9687C12.5469 39.7969 17.8359 38.9062 18.0156 38.9062C18.2031 38.9062 23.5625 39.8125 24.2734 39.9687L24.4844 40.0156V38.9219V37.8281L22.2969 36.625L20.1016 35.4297L20.1484 34.4922C20.1719 33.9766 20.2969 31.0234 20.4297 27.9297C20.5625 24.8359 20.6875 22.2891 20.7031 22.2734C20.7188 22.2578 23.9219 23.5547 27.8125 25.1641C31.7109 26.7734 34.9219 28.0937 34.9609 28.1094C35 28.125 35.0312 27.3984 35.0312 26.5V24.8516L32.2031 22.7656C30.6406 21.625 29.2188 20.5625 29.0391 20.4141L28.7031 20.1484V18.3516V16.5625H27.4141H26.125V17.3906C26.125 17.9375 26.0938 18.2031 26.0391 18.1875C25.9922 18.1719 24.8203 17.3203 23.4297 16.2969L20.8906 14.4297V10.3594C20.8906 6.35156 20.8516 5.35156 20.6172 4.08593C20.3594 2.71875 19.7969 1.375 19.2031 0.710934C18.5859 0.0234337 18.0234 -0.148441 17.4453 0.156246Z"
+                            transform="scale(0.6)" />
+                    </svg>
+                    <span>ICKET</span>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a th:href="@{/flights}">Рейсы</a></li>
+                    <li><a th:href="@{/clients}">Клиенты</a></li>
+                    <li><a th:href="@{/bookings}">Бронирования</a></li>
+                    <li><a th:href="@{/airplanes}">Самолеты</a></li>
+                </ul>
+            </nav>
+            <a class="logout-link" href="/logout">
+                <svg class="logout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 0 1 2 2v2h-2V4H5v16h9v-2h2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9z" />
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container admin-container">
+        <section class="admin-section">
+            <h2 class="section-title">Управление рейсами</h2>
+
+            <div class="search-filter card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="flight-number">Номер рейса</label>
+                        <input type="text" id="flight-number" placeholder="Введите номер рейса" maxlength="6"
+                            oninput="this.value=this.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase()">
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-date">Дата отправления</label>
+                        <input type="date" id="flight-date">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="flight-departure">Пункт отправления</label>
+                        <select id="flight-departure" name="departureCity">
+                            <option value="">Выберите город</option>
+                            <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-destination">Пункт назначения</label>
+                        <select id="flight-destination" name="destinationCity">
+                            <option value="">Выберите город</option>
+                            <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+                        </select>
+                    </div>
+                </div>
+                <button class="search-btn btn" onclick="filterFlights()">Поиск</button>
+                <button class="reset-btn btn" onclick="resetFlightFilters()">Сбросить</button>
+            </div>
+
+            <div class="add-form card">
+                <h3>Добавить новый рейс</h3>
+                <form id="add-flight-form" action="/flights" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="new-flight-number">Номер рейса</label>
+                            <input type="text" id="new-flight-number" name="flightNumber" placeholder="Например: SU1234"
+                                required maxlength="6"
+                                oninput="this.value=this.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase()">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-flight-date">Дата отправления</label>
+                            <input type="date" id="new-flight-date" name="departureDate" required min="">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-flight-departure">Пункт отправления</label>
+                            <select id="new-flight-departure" name="departureCity" required>
+                                <option value="">Выберите город</option>
+                                <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="new-flight-destination">Пункт назначения</label>
+                            <select id="new-flight-destination" name="destinationCity" required>
+                                <option value="">Выберите город</option>
+                                <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-flight-time">Время отправления</label>
+                            <input type="time" id="new-flight-time" name="departureTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-flight-duration">Время полета</label>
+                            <input type="time" id="new-flight-duration" name="flightDuration" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="new-flight-airline">Авиакомпания</label>
+                            <select id="new-flight-airline" name="airlineId" required>
+                                <option value="">Выберите авиакомпанию</option>
+                                <option th:each="airline : ${airlines}" th:value="${airline.airlineId}"
+                                    th:text="${airline.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-flight-brand">Марка самолета</label>
+                            <select id="new-flight-brand" name="brandId" required>
+                                <option value="">Сначала выберите авиакомпанию</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-flight-model">Модель самолета</label>
+                            <select id="new-flight-model" name="airplaneId" required>
+                                <option value="">Сначала выберите марку</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="add-btn btn">Добавить рейс</button>
+                </form>
+            </div>
+
+            <div class="data-table card">
+                <table id="flights-table">
+                    <thead>
+                        <tr>
+                            <th>Номер рейса</th>
+                            <th>Дата отправления</th>
+                            <th>Авиакомпания</th>
+                            <th>Марка самолета</th>
+                            <th>Модель самолета</th>
+                            <th>Время отправления</th>
+                            <th>Пункт отправления</th>
+                            <th>Пункт назначения</th>
+                            <th>Время полета</th>
+                            <th>Свободных мест</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="flight : ${flights}">
+                            <td th:text="${flight.flightNumber}"></td>
+                            <td th:text="${#temporals.format(flight.departureDate, 'dd.MM.yyyy')}"></td>
+                            <td th:text="${flight.airlineName}"></td>
+                            <td th:text="${flight.brandName}"></td>
+                            <td th:text="${flight.airplaneModel}"></td>
+                            <td th:text="${#temporals.format(flight.departureTime, 'HH:mm')}"></td>
+                            <td th:text="${flight.departureCity}"></td>
+                            <td th:text="${flight.destinationCity}"></td>
+                            <td th:text="${#temporals.format(flight.flightDuration, 'HH:mm')}"></td>
+                            <td th:text="${flight.availableSeats}"></td>
+                            <td>
+                                <button class="edit-btn" th:data-id="${flight.flightId}"
+                                    th:data-airplane-id="${flight.airplaneId}"><i class="fas fa-edit"></i></button>
+                                <button class="delete-btn" th:data-id="${flight.flightId}"><i
+                                        class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script src="/js/flights.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        window.cities = /*[[${cities}]]*/[];
+        /*]]>*/
+    </script>
+</body>
+
+</html>
